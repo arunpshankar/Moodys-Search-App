@@ -1,12 +1,8 @@
 # Use Python 3.9 Alpine as the base image
 FROM python:3.9-slim as builder
 
-# Your Dockerfile content
-
-
 # Set the working directory to /app
 WORKDIR /app
-
 
 # Upgrade pip and install dependencies in a virtual environment
 RUN python -m venv /venv
