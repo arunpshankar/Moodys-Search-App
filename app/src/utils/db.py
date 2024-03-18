@@ -1,11 +1,10 @@
 from google.cloud.sql.connector import Connector
 from sqlalchemy.engine.base import Connection
-from sqlalchemy.engine.base import Engine 
+from sqlalchemy.engine.base import Engine
 from src.config.logging import logger
 from sqlalchemy import create_engine
 from src.config.setup import config
 import bcrypt
-
 
 # Global variables
 INSTANCE_CONNECTION_NAME = f"{config.PROJECT_ID}:{config.REGION}:{config.CLOUD_SQL_INSTANCE}"
@@ -13,28 +12,37 @@ INSTANCE_CONNECTION_NAME = f"{config.PROJECT_ID}:{config.REGION}:{config.CLOUD_S
 # Initialize Connector object globally to reuse
 connector = Connector()
 
+# This will hold the connection object once it's created
+_connection = None
+
+# Added to track if the connection has been logged
+_connection_established_logged = False
 
 def get_connection() -> Connection:
     """
-    Establishes a connection to the Cloud SQL instance.
+    Establishes a connection to the Cloud SQL instance or returns the existing connection if already established.
+    Logs the connection establishment only the first time.
 
     Returns:
         A connection object to the Cloud SQL database.
     """
-    try:
-        connection = connector.connect(
-            INSTANCE_CONNECTION_NAME,
-            "pymysql",
-            user=config.CLOUD_SQL_USERNAME,
-            password=config.CLOUD_SQL_PASSWORD,
-            db=config.CLOUD_SQL_DATABASE
-        )
-        logger.info("Successfully established connection to Cloud SQL.")
-        return connection
-    except Exception as e:
-        logger.error(f"Failed to connect to Cloud SQL: {e}")
-        raise
-
+    global _connection, _connection_established_logged  # Reference the global variables to modify them
+    if _connection is None:  # Check if the connection does not already exist
+        try:
+            _connection = connector.connect(
+                INSTANCE_CONNECTION_NAME,
+                "pymysql",
+                user=config.CLOUD_SQL_USERNAME,
+                password=config.CLOUD_SQL_PASSWORD,
+                db=config.CLOUD_SQL_DATABASE
+            )
+            if not _connection_established_logged:
+                logger.info("Successfully established connection to Cloud SQL.")
+                _connection_established_logged = True  # Ensure this log happens only once
+        except Exception as e:
+            logger.error(f"Failed to connect to Cloud SQL: {e}")
+            raise
+    return _connection
 
 def create_engine_with_connection_pool() -> Engine:
     """
@@ -44,9 +52,7 @@ def create_engine_with_connection_pool() -> Engine:
         A SQLAlchemy engine object.
     """
     engine = create_engine("mysql+pymysql://", creator=get_connection)
-    logger.info("SQLAlchemy engine with connection pool created successfully.")
     return engine
-
 
 def encrypt_password(password: str) -> bytes:
     """

@@ -1,5 +1,6 @@
 from langchain_community.embeddings import VertexAIEmbeddings
 from src.config.logging import logger
+from src.config.setup import config
 from typing import List
 from tqdm import tqdm
 
@@ -8,7 +9,7 @@ class MyVertexAIEmbeddings(VertexAIEmbeddings):
     """
     Custom class for handling batch processing with Vertex AI embeddings.
     """
-    model_name = 'textembedding-gecko'
+    model_name = config.TEXT_EMBED_MODEL_NAME
     max_batch_size = 5
 
     def embed_names(self, names: List[str]) -> List[List[float]]:

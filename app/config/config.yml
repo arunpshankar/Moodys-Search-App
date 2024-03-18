@@ -1,7 +1,7 @@
 project_id: arun-genai-bb
 region: us-central1
 credentials_json: ./credentials/key.json
-text_embed_model_name: text-gecko@latest
+text_embed_model_name: textembedding-gecko@003
 text_gen_model_name: gemini-1.0-pro
 cloud_sql_instance: vais-app-builder
 cloud_sql_username: arun

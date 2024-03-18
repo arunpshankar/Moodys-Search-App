@@ -1,7 +1,7 @@
-from src.query.embed import MyVertexAIEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import VertexAIEmbeddings
 from src.config.logging import logger
-from src.config.setup import *
+from src.config.setup import config
 from typing import List 
 from typing import Dict 
 
@@ -31,7 +31,7 @@ def execute_query(query: str, retriever):
 
 
 def find_closest_match(query: str) -> List[Dict]:
-    embeddings = MyVertexAIEmbeddings()
+    embeddings = VertexAIEmbeddings(model_name=config.TEXT_EMBED_MODEL_NAME)
     vector_store = FAISS.load_local("./data/faiss_index", embeddings, allow_dangerous_deserialization=True)
     retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': 3})
     matches = execute_query(query, retriever)

@@ -75,8 +75,7 @@ class Config:
         os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
         
-    @staticmethod
-    def _set_access_token() -> str:
+    def _set_access_token(self) -> str:
         """
         Fetch an access token for authentication using the Google Cloud SDK for Python.
 
@@ -87,7 +86,7 @@ class Config:
         try:  
             # Load the credentials from the service account file
             credentials = service_account.Credentials.from_service_account_file(
-                config.CREDENTIALS_PATH,
+                self.__config['credentials_json'],
                 scopes=["https://www.googleapis.com/auth/cloud-platform"],
             )
 

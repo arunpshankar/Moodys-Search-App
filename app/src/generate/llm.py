@@ -1,5 +1,5 @@
 from langchain.prompts.chat import HumanMessagePromptTemplate, ChatPromptTemplate
-from langchain_community.chat_models import ChatVertexAI
+from langchain_google_vertexai import ChatVertexAI
 from src.config.logging import logger
 from src.config.setup import config
 from typing import Optional
