@@ -64,7 +64,17 @@ class Config:
         except Exception as e:
             logger.error(f"Failed to load the configuration file. Error: {e}")
     
+    @staticmethod
+    def _set_google_credentials(credentials_path: str) -> None:
+        """
+        Set the Google application credentials environment variable.
 
+        Args:
+        - credentials_path (str): Path to the Google credentials file.
+        """
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+
+        
     @staticmethod
     def _set_access_token() -> str:
         """
