@@ -1,3 +1,5 @@
+from google.auth.transport.requests import Request
+from google.oauth2 import service_account
 from src.config.logging import logger
 from typing import Dict
 from typing import Any
@@ -61,33 +63,38 @@ class Config:
                 return yaml.safe_load(file)
         except Exception as e:
             logger.error(f"Failed to load the configuration file. Error: {e}")
-
-    @staticmethod
-    def _set_google_credentials(credentials_path: str) -> None:
-        """
-        Set the Google application credentials environment variable.
-
-        Args:
-        - credentials_path (str): Path to the Google credentials file.
-        """
-        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+    
 
     @staticmethod
     def _set_access_token() -> str:
         """
-        Fetch an access token for authentication.
+        Fetch an access token for authentication using the Google Cloud SDK for Python.
 
         Returns:
         - str: The fetched access token.
         """
         logger.info("Fetching access token...")
-        cmd = ["gcloud", "auth", "print-access-token"]
         try:
-            token = subprocess.check_output(cmd).decode('utf-8').strip()
+            # Path to your service account key file
+            key_path = "path/to/your/service-account-file.json"
+            
+            # Load the credentials from the service account file
+            credentials = service_account.Credentials.from_service_account_file(
+                key_path,
+                scopes=["https://www.googleapis.com/auth/cloud-platform"],
+            )
+
+            # Request a new token if needed
+            if not credentials.valid or credentials.expired:
+                credentials.refresh(Request())
+
             logger.info("Access token obtained successfully.")
-            return token
-        except subprocess.CalledProcessError as e:
+            return credentials.token
+        except Exception as e:
             logger.error(f"Failed to fetch access token. Error: {e}")
+            return ""
+
+    
 
 
 config = Config()
