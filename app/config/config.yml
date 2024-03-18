@@ -1,0 +1,14 @@
+project_id: arun-genai-bb
+region: us-central1
+credentials_json: ./credentials/key.json
+text_embed_model_name: text-gecko@latest
+text_gen_model_name: gemini-1.0-pro
+cloud_sql_instance: vais-app-builder
+cloud_sql_username: arun
+cloud_sql_password: '9586'
+cloud_sql_database: moodys
+cloud_sql_users_table: users
+cloud_sql_feedback_table: feedback 
+cloud_sql_urls_table: entity_urls 
+bucket: vais-app-builder
+cdn_search_datastore_id: moodys-demo-cdn-search_1703179153979
