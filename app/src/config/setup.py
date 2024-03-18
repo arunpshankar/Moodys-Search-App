@@ -3,9 +3,9 @@ from google.oauth2 import service_account
 from src.config.logging import logger
 from typing import Dict
 from typing import Any
-import subprocess
 import yaml
 import os
+
 
 class Config:
     _instance = None
@@ -84,13 +84,10 @@ class Config:
         - str: The fetched access token.
         """
         logger.info("Fetching access token...")
-        try:
-            # Path to your service account key file
-            key_path = "path/to/your/service-account-file.json"
-            
+        try:  
             # Load the credentials from the service account file
             credentials = service_account.Credentials.from_service_account_file(
-                key_path,
+                config.CREDENTIALS_PATH,
                 scopes=["https://www.googleapis.com/auth/cloud-platform"],
             )
 

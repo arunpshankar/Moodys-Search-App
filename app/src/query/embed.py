@@ -1,4 +1,4 @@
-from langchain.embeddings import VertexAIEmbeddings
+from langchain_community.embeddings import VertexAIEmbeddings
 from src.config.logging import logger
 from typing import List
 from tqdm import tqdm
