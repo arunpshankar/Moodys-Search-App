@@ -3,6 +3,7 @@ from src.config.logging import logger
 from typing import List
 from tqdm import tqdm
 
+
 class MyVertexAIEmbeddings(VertexAIEmbeddings):
     """
     Custom class for handling batch processing with Vertex AI embeddings.
