@@ -6,6 +6,22 @@ __pycache__/
 # C extensions
 *.so
 
+# venv 
+.moodys-search
+.moodys-search/
+
+# pdf
+pdf
+pdf/
+
+# DS_Store 
+.DS_Store
+.DS_Store/
+
+# credentials 
+credentials
+credentials/
+
 # Distribution / packaging
 .Python
 build/
