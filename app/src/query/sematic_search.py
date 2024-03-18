@@ -1,5 +1,5 @@
-from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import VertexAIEmbeddings
+from langchain_community.vectorstores import FAISS
 from src.config.logging import logger
 from src.config.setup import config
 from typing import List 
