@@ -21,6 +21,8 @@ pdf/
 # credentials 
 credentials
 credentials/
+moodys/credentials
+moodys/credentials/
 
 # Distribution / packaging
 .Python
