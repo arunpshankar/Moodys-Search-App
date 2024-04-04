@@ -1,9 +1,11 @@
-from typing import Dict
 from langchain_community.document_loaders import JSONLoader
 from langchain_google_vertexai import VertexAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from src.config.logging import logger
 from src.config.setup import config
+from typing import Dict
+
+
 
 def extract_metadata(record: Dict[str, any], metadata: Dict[str, str]) -> Dict[str, str]:
     """
