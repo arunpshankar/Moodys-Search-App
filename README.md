@@ -51,6 +51,44 @@ Gear up for development with these steps:
    streamlit run src/app/app.py
    ```
 
+Here's a rewritten version of your instructions in Markdown format for inclusion in a GitHub README file:
+
+---
+
+## Setting Up Company Name Embedding with FAISS
+
+When updating your website's search feature to include new entities, follow these steps:
+
+1. **Update the Entities Data**:
+   - Add a new JSONLines file containing the new entities to `./data/entities.jsonl`.
+   - Optionally, create a `test_entities.jsonl` in the same directory to include sample variants similar to what is shown in the existing `test_entities.jsonl` file.
+
+2. **Generate the FAISS Index**:
+   - Execute the following command:
+     ```
+     python src/embed/encode.py
+     ```
+   - This script processes the company names and updates the index files in `./data/faiss_index`:
+     - `index.faiss`
+     - `index.pkl`
+
+3. **Testing Individual Cases**:
+   - To test individual test cases, run:
+     ```
+     python src/embed/match.py
+     ```
+
+4. **Run Bulk Tests**:
+   - To evaluate all entities alongside their variants, use:
+     ```
+     python src/embed/test.py
+     ```
+   - This module tests for 20 entities, each with 5 variants (representing potential user search terms). It assesses success based on the top match resolution via semantic search and computes coverage (accuracy).
+
+By following these instructions, you can efficiently update and maintain the accuracy of your search functionalities using FAISS indexing.
+
+
+
 ## 🚀 Deployment to Google Cloud Run
 
 Take your app to the clouds with these deployment steps:
