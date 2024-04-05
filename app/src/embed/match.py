@@ -50,12 +50,9 @@ if __name__ == "__main__":
     text_embedder = VertexAIEmbeddings(model_name=config.TEXT_EMBED_MODEL_NAME)
     text_embedder.instance['batch_size'] = 100
 
-    question = "hsbc bank"
+    question = "rhb"
 
     vector_store = FAISS.load_local("./data/faiss_index/", text_embedder, allow_dangerous_deserialization=True)
-    retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': 3})
+    retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': 1})
     matches_by_title = match_by_country(question, retriever)
-
-   
-    print("Matches by Company Name:")
-    print(format_matches(matches_by_title))
+    print(matches_by_title)
