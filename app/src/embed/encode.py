@@ -6,7 +6,6 @@ from src.config.setup import config
 from typing import Dict
 
 
-
 def extract_metadata(record: Dict[str, any], metadata: Dict[str, str]) -> Dict[str, str]:
     """
     Extracts necessary metadata from a given record and updates the metadata dictionary.
@@ -21,6 +20,7 @@ def extract_metadata(record: Dict[str, any], metadata: Dict[str, str]) -> Dict[s
     metadata['url'] = record.get('url', 'Unknown')
     metadata['country'] = record.get('country', 'Unknown')
     return metadata
+
 
 def load_and_index(file_path: str) -> FAISS:
     """

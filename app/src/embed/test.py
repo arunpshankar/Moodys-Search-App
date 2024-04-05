@@ -42,6 +42,7 @@ def test_name_resolution(filepath: str) -> List[bool]:
     success_rate = sum(results) / len(results) * 100
     logger.info(f"Success Rate: {success_rate:.2f}%")
 
+
 if __name__ == "__main__":
     test_data_path = './data/test_entities.jsonl'
     test_name_resolution(test_data_path)
