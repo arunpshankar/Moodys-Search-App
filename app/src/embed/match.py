@@ -28,6 +28,6 @@ if __name__ == "__main__":
     question = "Nextracker, Inc"
 
     vector_store = FAISS.load_local("./data/faiss_index/", text_embedder, allow_dangerous_deserialization=True)
-    retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': 1, 'fetch_k': 5, 'lambda_mult': 0.9})
+    retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': 1})
     matches_by_title = match_by_country(question, retriever)
     print(matches_by_title[0])
