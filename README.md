@@ -52,7 +52,7 @@ Gear up for development with these steps:
    ```
 
 
-## Setting Up Company Name Embedding with FAISS
+## 🔍Setting Up Company Name Embedding with FAISS
 
 When updating your website's search feature to include new entities, follow these steps:
 
