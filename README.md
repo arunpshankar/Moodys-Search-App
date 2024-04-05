@@ -51,9 +51,6 @@ Gear up for development with these steps:
    streamlit run src/app/app.py
    ```
 
-Here's a rewritten version of your instructions in Markdown format for inclusion in a GitHub README file:
-
----
 
 ## Setting Up Company Name Embedding with FAISS
 
@@ -86,7 +83,6 @@ When updating your website's search feature to include new entities, follow thes
    - This module tests for 20 entities, each with 5 variants (representing potential user search terms). It assesses success based on the top match resolution via semantic search and computes coverage (accuracy).
 
 By following these instructions, you can efficiently update and maintain the accuracy of your search functionalities using FAISS indexing.
-
 
 
 ## 🚀 Deployment to Google Cloud Run
