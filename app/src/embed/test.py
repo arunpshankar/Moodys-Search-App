@@ -1,11 +1,11 @@
-from typing import List, Dict, Tuple
-import json
-from tqdm import tqdm
 from langchain_google_vertexai import VertexAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from src.embed.match import match_by_country
 from src.config.logging import logger
 from src.config.setup import config
+from typing import List
+from tqdm import tqdm
+import json
 
 
 # Setup the text embedder
@@ -42,6 +42,6 @@ def test_name_resolution(filepath: str) -> List[bool]:
     success_rate = sum(results) / len(results) * 100
     logger.info(f"Success Rate: {success_rate:.2f}%")
 
-# Path to your test data file
-test_data_path = './data/test_entities.jsonl'
-test_name_resolution(test_data_path)
+if __name__ == "__main__":
+    test_data_path = './data/test_entities.jsonl'
+    test_name_resolution(test_data_path)
